@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>athlete</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #ffffff;
+    overflow: hidden;
+  }
+
+  #scene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* stick figure container */
+  #athlete {
+    position: absolute;
+    left: 20%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* body */
+  .torso {
+    width: 2px;
+    height: 60px;
+    background: #000;
+    margin: 0 auto;
+  }
+
+  /* legs */
+  .leg {
+    position: absolute;
+    top: 60px;
+    width: 2px;
+    height: 40px;
+    background: #000;
+    transform-origin: top center;
+  }
+
+  .left {
+    left: -6px;
+  }
+
+  .right {
+    left: 6px;
+  }
+</style>
+</head>
+<body>
+
+<div id="scene">
+  <div id="athlete">
+    <div class="torso"></div>
+    <div class="leg left" id="leftLeg"></div>
+    <div class="leg right" id="rightLeg"></div>
+  </div>
+</div>
+
+<script>
+  let t = 0;
+
+  function animate() {
+    t += 0.03;
+
+    // knee-only motion: small controlled rotation
+    const kneeA = Math.sin(t) * 12;
+    const kneeB = Math.sin(t + Math.PI) * 12;
+
+    document.getElementById("leftLeg").style.transform =
+      `rotate(${kneeA}deg)`;
+
+    document.getElementById("rightLeg").style.transform =
+      `rotate(${kneeB}deg)`;
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+
+</body>
+</html>
